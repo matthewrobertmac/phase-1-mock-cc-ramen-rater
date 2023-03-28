@@ -1,3 +1,55 @@
+let ramenMenuDiv = document.getElementById("ramen-menu");
+let form = document.getElementById("new-ramen");
+
+fetch('http://localhost:3000/ramens')
+  .then(response => response.json())
+  .then(ramens => renderRamens(ramens));
+
+
+function renderRamens(ramens) {
+    ramens.forEach((ramen) => {
+        console.log(ramen);
+        let ramenImage = document.createElement("img");
+        ramenImage.src = ramen.image;
+        ramenMenuDiv.append(ramenImage);
+
+        ramenImage.addEventListener("click", function() {
+            let displayRamenImage = document.querySelector(".detail-image");
+            displayRamenImage.src = ramen.image;
+            let displayName = document.querySelector(".name");
+            let displayRestaurant = document.querySelector(".restaurant");
+            displayName.textContent = ramen.name;
+            displayRestaurant.textContent = ramen.restaurant;
+
+            let ramenRating = document.querySelector("#rating-display");
+            ramenRating.textContent = ramen.rating;
+
+            let ramenComment = document.querySelector("#comment-display");
+            ramenComment.textContent = ramen.comment;
+        })
+    })
+}
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    console.log(
+        e.target.name.value,
+        e.target.restaurant.value,
+        e.target.image.value, e.target["new-comment"].value
+    );
+
+    let newRamen = {
+        name: e.target.name.value,
+        restaurant: e.target.restaurant.value,
+        image: e.target.image.value,
+        rating: e.target.rating.value,
+        comment: e.target["new-comment"].value,
+    };
+    renderRamens([newRamen]);
+})
+
+/*
+
 // write your code here
 var ramenArray;
 
@@ -13,7 +65,8 @@ fetch("http://localhost:3000/ramens")
 
 
 ramenMenu = document.getElementById("ramen-menu")
-imgGoesHere = document.getElementsByClassName("detail-image");
+const form = document.querySelector(".form")
+
 
 function createRamenMenu() {
     ramenArray.forEach((ramen) => {
@@ -28,13 +81,50 @@ function createRamenMenu() {
         ramenMenu.append(ramenImg);
     });
     
+    
+    
+    
 
 
 }
 
-
-
 /*
+
+
+form.addEventListener("submit", function(e){
+    let newRamen = {};
+    e.preventDefault();
+    console.log("Form is submitted");
+    console.log(
+        e.target.name.value,
+        e.target.restaurant.value,
+        e.target.image.value,
+        e.target.rating.value,
+        e.target.comment.value
+    )
+})
+
+newRamen = {
+    name: e.target.name.value,
+    restaurant: e.target.restaurant.value,
+    image: e.target.image.value,
+    rating: e.target.rating.value,
+    commen: e.target.comment.value,
+};
+
+
+form.addEventListener("submit", function(e){
+    let newRamen = {};
+    e.preventDefault();
+    console.log("Form is submitted");
+    console.log(
+        e.target.name.value,
+        e.target.restaurant.value,
+        e.target.image.value,
+        e.target.rating.value,
+        e.target.comment.value
+    )
+})
 
 imgGoesHere.src = ramenImg.src; 
 
