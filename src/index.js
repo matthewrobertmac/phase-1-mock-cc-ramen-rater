@@ -9,21 +9,52 @@ fetch("http://localhost:3000/ramens")
   .then(() => {
     console.log(ramenArray);
   })
-  .then(createRamenImg);
+  .then(createRamenMenu);
 
 
 ramenMenu = document.getElementById("ramen-menu")
+imgGoesHere = document.getElementsByClassName("detail-image");
 
-function createRamenImg() {
+function createRamenMenu() {
+    ramenArray.forEach((ramen) => {
+        console.log(ramen);
+        ramenImg = document.createElement("img");
+        ramenImg.addEventListener("click", ramenInfo = () => {
+            document.querySelector('.detail-image').src = ramen.image;
+           })
+        ramenImg.src = ramen.image; 
+        ramenMenu.append(ramenImg);
+    });
+    
+
+
+}
+
+
+
+/*
+
+imgGoesHere.src = ramenImg.src; 
+
+function createRamenMenu() {
     for (i = 0; i < ramenArray.length; i++) {
     console.log(ramenArray[i]);
     ramenImg = document.createElement("img");
     ramenImg.src = ramenArray[i].image;
     ramenMenu.append(ramenImg);
+    
 }}
 
+
+
+/*
 ramenImg.addEventListener("click", {
-    imgGoesHere = document.querySelector("img.detail-image");
+    imgGoesHere = ramenImg.src
+})
+
+
+ramenImg.addEventListener("click", {
+    imgGoesHere = document.getElementsByClassName("detail-image");
     imgGoesHere.src = ramenImg;
 
 })
