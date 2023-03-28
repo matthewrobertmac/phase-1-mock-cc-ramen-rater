@@ -21,6 +21,8 @@ function createRamenMenu() {
         ramenImg = document.createElement("img");
         ramenImg.addEventListener("click", ramenInfo = () => {
             document.querySelector('.detail-image').src = ramen.image;
+            document.querySelector('.name').textContent = ramen.name;
+            document.querySelector('.restaurant').textContent = ramen.restaurant;
            })
         ramenImg.src = ramen.image; 
         ramenMenu.append(ramenImg);
